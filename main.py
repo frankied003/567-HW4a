@@ -17,8 +17,11 @@ def getRepos():
         name = repo.get("name")
         reposInAccount.append(name)
 
+    return reposInAccount
+
 
 def getCommits(repos):
+    repoCommitDict = {}
     for repo in repos:
         endpoint = "/repos/" + userId + "/" + repo + "/commits"
         url = urlRoot + endpoint
@@ -29,6 +32,9 @@ def getCommits(repos):
         for commit in data:
             commitCount += 1
         print("Repo: " + repo + " Number of commits: " + str(commitCount))
+        repoCommitDict[repo] = commitCount
+
+    return repoCommitDict
 
 
 if __name__ == "__main__":
