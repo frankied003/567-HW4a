@@ -4,10 +4,9 @@ import json
 urlRoot = "https://api.github.com"
 userId = "frankied003"
 
-reposInAccount = []
 
-
-def getRepos():
+def getCommits():
+    reposInAccount = []
     endpoint = "/users/" + userId + "/repos"
     url = urlRoot + endpoint
     headers = {"User-Agent": "Frankie-is-cool", "content-type": "application/json"}
@@ -17,12 +16,8 @@ def getRepos():
         name = repo.get("name")
         reposInAccount.append(name)
 
-    return reposInAccount
-
-
-def getCommits(repos):
     repoCommitDict = {}
-    for repo in repos:
+    for repo in reposInAccount:
         endpoint = "/repos/" + userId + "/" + repo + "/commits"
         url = urlRoot + endpoint
         headers = {"User-Agent": "Frankie-is-cool", "content-type": "application/json"}
@@ -38,5 +33,4 @@ def getCommits(repos):
 
 
 if __name__ == "__main__":
-    getRepos()
-    getCommits(reposInAccount)
+    getCommits()
